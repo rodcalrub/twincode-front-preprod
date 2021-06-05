@@ -462,9 +462,9 @@ export default {
         }
       );
       if (input == "" || isNaN( input) || solution == "" || isNaN(solution)) {
-        console.error("Input or Solution cannot be empty");
+        alert("Input or Solution cannot be empty");
       } else if (contains) {
-        console.error("That input already exists");
+        alert("That input already exists");
       } else {
         fetch(
           `${process.env.VUE_APP_TC_API}/tests/` +

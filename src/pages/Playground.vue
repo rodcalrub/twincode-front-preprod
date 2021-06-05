@@ -17,7 +17,7 @@
         <div class="w-2/3 p-2">
           <div>{{ (maxTime - timePassed) | secondsToString }}</div>
           <div v-html="exerciseDescription"></div>
-          <div style="height: 70vh;" @keyup.ctrl.83="validate" v-if="language" >
+          <div style="height: 70vh;" @keyup.ctrl.83="validate"  >
             Language(JavaScript): {{ language }}
             <div
               ref="pairCursor"
@@ -35,26 +35,6 @@
             ></codemirror>
             <pre>     <p class="text-pink-700 inline">return</p> output;</pre>
             <pre>}</pre>
-            <br/>
-          </div>
-          <div style="height: 70vh;" @keyup.ctrl.83="validate" v-else >
-            <div
-              ref="pairCursor"
-              id="pairCursor"
-              class="absolute bg-yellow-500 hidden"
-            ></div>
-            <br/>
-            Language(Python): {{ language }}
-            <pre><p class="text-purple-800 inline">def</p> main(input):</pre>
-            <codemirror
-              ref="cmEditor"
-              v-model="code"
-              id="codemirror"
-              :options="cmOption"
-              :events="['inputRead', 'change']"
-            ></codemirror>
-            <pre>     <p class="text-pink-700 inline">return</p> output</pre>
-            <pre></pre>
             <br/>
           </div>
           <div
@@ -203,7 +183,7 @@ import Vue from "vue";
 import Message from "../components/Message";
 import { codemirror } from "vue-codemirror";
 import "codemirror/mode/javascript/javascript.js";
-import "codemirror/mode/python/python.js";
+// import "codemirror/mode/python/python.js";
 
 import "codemirror/lib/codemirror.css";
 // import brython from '../../node_modules/brython/brython.js';
@@ -352,6 +332,7 @@ export default {
       this.testDescription = pack.data.testDescription;
       this.peerChange = pack.data.peerChange;
       this.$refs.messageContainer.innerHTML = "";
+      console.log(pack.data.validations);
       this.validations = pack.data.validations;
       this.code = "";
       this.clearResult();
@@ -364,7 +345,6 @@ export default {
     },
     newExercise(pack) {
       dbg("EVENT newExercise", pack);
-
       this.loadingTest = false;
       this.starting = false;
       this.timePassed = 0;
@@ -383,11 +363,11 @@ export default {
       this.$socket.client.emit("clientReconnection", localStorage.token);
     },
     countDown(pack) {
-      //dbg("EVENT countDown",pack);
+      dbg("EVENT countDown", pack);
       this.timePassed = this.maxTime - pack.data;
       let factor = 100 / this.maxTime;
       let width = parseFloat(this.$refs.timeBar.style.width, 10) - factor;
-      this.$refs.timeBar.style.width = width + "%";
+      // this.$refs.timeBar.style.width = width + "%";
       if (width < 20) {
         this.$refs.timeBar.classList.remove("bg-yellow-500");
         this.$refs.timeBar.classList.add("bg-red-500");
@@ -448,10 +428,11 @@ export default {
   methods: {
     sendMessage() {
       dbg("method sendMessage - init", this.myMessage);
+      dbg("exerciseType", this.exerciseType);
+
       if (this.exerciseType == "PAIR") {
         this.newMessage(this.myMessage, true);
         this.$socket.client.emit("msg", this.pack(this.myMessage));
-
         this.myMessage = "";
       }
     },
@@ -480,26 +461,24 @@ export default {
       this.clearResult();
       try {
         var solutions = [];
-        if (this.language) {
-          this.validations.forEach((val) => {
-            solutions.push(
-              eval(
-                "var input=" +
-                  JSON.stringify(val.input) +
-                  ";" +
-                  this.code +
-                  "; output;"
-              )
-            );
-          });
-        } else {
-          var result = codemirror(this.code, {
-            lineNumbers: true,
-            mode: "python",
-          });
-          console.log("RESULTADO: "+result);
-          // brython({debug:1, ids:['hello']});
-        }
+        console.log(this.validations);
+        this.validations.forEach((val) => {
+          solutions.push(
+            eval(
+              "var input=" +
+                JSON.stringify(val.input) +
+                ";" +
+                this.code +
+                "; output;"
+            )
+          );
+        });
+        // var result = codemirror(this.code, {
+        //   lineNumbers: true,
+        //   mode: "python",
+        // });
+        // console.log("RESULTADO: "+result);
+        // brython({debug:1, ids:['hello']});
 
         this.validations.forEach((input) => {
           console.log("Input: " + JSON.stringify(input.input));
@@ -704,16 +683,16 @@ export default {
   },
   mounted() {
     dbg("mounted - init");
-    this.language = true;
-    if (localStorage.getItem("language") == "Python") {
-      this.language = false;
-    }
-    console.log("Si true -> JS, sino Python: " + this.language);
+    // this.language = true;
+    // if (localStorage.getItem("language") == "Python") {
+    //   this.language = false;
+    // }
+    // console.log("Si true -> JS, sino Python: " + this.language);
 
-    this.$refs.cmEditor.codemirror.on("change", this.onCmCodeChange);
-    this.$refs.cmEditor.codemirror.on("cursorActivity", this.cursorActivity);
-    const elemento = document.getElementsByClassName("CodeMirror-scroll")[0];
-    elemento.addEventListener("scroll", this.handleScroll);
+    // this.$refs.cmEditor.codemirror.on("change", this.onCmCodeChange);
+    // this.$refs.cmEditor.codemirror.on("cursorActivity", this.cursorActivity);
+    // const elemento = document.getElementsByClassName("CodeMirror-scroll")[0];
+    // elemento.addEventListener("scroll", this.handleScroll);
 
     // Cursor functionaliy disabled
     /*let toggle = true;
