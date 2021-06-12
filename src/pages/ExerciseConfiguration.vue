@@ -23,13 +23,35 @@
             v-model="selectedTest"
           />
           <button
-            class="mt-3 p-1 rounded-md bg-gray-100 border px-5 text-gray-800 hover:bg-green-200 hover:border-green-300 hover:text-green-800"
+            class="
+              mt-3
+              p-1
+              rounded-md
+              bg-gray-100
+              border
+              px-5
+              text-gray-800
+              hover:bg-green-200
+              hover:border-green-300
+              hover:text-green-800
+            "
             @click="createTest()"
           >
             + Add test
           </button>
           <button
-            class="mt-3 ml-2 p-1 rounded-md bg-gray-100 border px-5 text-red-800 hover:bg-red-200 hover:border-red-300"
+            class="
+              mt-3
+              ml-2
+              p-1
+              rounded-md
+              bg-gray-100
+              border
+              px-5
+              text-red-800
+              hover:bg-red-200
+              hover:border-red-300
+            "
             @click="removeTest()"
           >
             - Remove test
@@ -46,7 +68,19 @@
                 Name:
               </label>
               <input
-                class="ml-2 appearance-none border rounded py-2 px-3 w-40 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                class="
+                  ml-2
+                  appearance-none
+                  border
+                  rounded
+                  py-2
+                  px-3
+                  w-40
+                  text-gray-700
+                  leading-tight
+                  focus:outline-none
+                  focus:shadow-outline
+                "
                 id="name"
                 type="text"
                 v-model="tests[selectedTest].name"
@@ -60,7 +94,19 @@
                 Description:
               </label>
               <textarea
-                class="ml-2 appearance-none border rounded py-2 px-3 w-10/12 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                class="
+                  ml-2
+                  appearance-none
+                  border
+                  rounded
+                  py-2
+                  px-3
+                  w-10/12
+                  text-gray-700
+                  leading-tight
+                  focus:outline-none
+                  focus:shadow-outline
+                "
                 id="description"
                 type="text"
                 v-model="tests[selectedTest].description"
@@ -74,7 +120,19 @@
                 Preparation time:
               </label>
               <input
-                class="ml-2 appearance-none border rounded py-2 px-3 w-20 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                class="
+                  ml-2
+                  appearance-none
+                  border
+                  rounded
+                  py-2
+                  px-3
+                  w-20
+                  text-gray-700
+                  leading-tight
+                  focus:outline-none
+                  focus:shadow-outline
+                "
                 id="time"
                 type="number"
                 v-model="tests[selectedTest].time"
@@ -109,7 +167,17 @@
             class="inline"
           />
           <button
-            class="inline absolute right-0 p-2 rounded-md bg-gray-100 border px-5 text-gray-800"
+            class="
+              inline
+              absolute
+              right-0
+              p-2
+              rounded-md
+              bg-gray-100
+              border
+              px-5
+              text-gray-800
+            "
             @click="createExercise()"
           >
             Add excercise
@@ -126,7 +194,19 @@
                 Name:
               </label>
               <input
-                class="ml-2 appearance-none border rounded py-2 px-3 w-40 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                class="
+                  ml-2
+                  appearance-none
+                  border
+                  rounded
+                  py-2
+                  px-3
+                  w-40
+                  text-gray-700
+                  leading-tight
+                  focus:outline-none
+                  focus:shadow-outline
+                "
                 :id="`exerciseName${selectedExerciseIndex}`"
                 type="text"
                 v-model="
@@ -142,7 +222,19 @@
                 Description:
               </label>
               <textarea
-                class="ml-2 appearance-none border rounded py-2 px-3 w-10/12 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                class="
+                  ml-2
+                  appearance-none
+                  border
+                  rounded
+                  py-2
+                  px-3
+                  w-10/12
+                  text-gray-700
+                  leading-tight
+                  focus:outline-none
+                  focus:shadow-outline
+                "
                 :id="`exerciseDescription${selectedExerciseIndex}`"
                 type="text"
                 v-model="
@@ -159,17 +251,50 @@
                 Validations:
               </label>
               <input
-                class="ml-2 appearance-none border rounded py-1 px-2 w-20 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                class="
+                  ml-2
+                  appearance-none
+                  border
+                  rounded
+                  py-1
+                  px-2
+                  w-20
+                  text-gray-700
+                  leading-tight
+                  focus:outline-none
+                  focus:shadow-outline
+                "
                 :id="`inputNewInput`"
                 type="text"
               />
               <input
-                class="ml-2 appearance-none border rounded py-1 px-2 w-20 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                class="
+                  ml-2
+                  appearance-none
+                  border
+                  rounded
+                  py-1
+                  px-2
+                  w-20
+                  text-gray-700
+                  leading-tight
+                  focus:outline-none
+                  focus:shadow-outline
+                "
                 :id="`inputNewSolution`"
                 type="text"
               />
               <button
-                class="inline right-0 p-2 rounded-md bg-gray-100 border px-9 text-gray-800"
+                class="
+                  inline
+                  right-0
+                  p-2
+                  rounded-md
+                  bg-gray-100
+                  border
+                  px-9
+                  text-gray-800
+                "
                 @click="newValidation()"
               >
                 New Validation
@@ -191,7 +316,19 @@
                     Input:
                   </label>
                   <input
-                    class="ml-2 appearance-none border rounded py-2 px-2 w-20 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    class="
+                      ml-2
+                      appearance-none
+                      border
+                      rounded
+                      py-2
+                      px-2
+                      w-20
+                      text-gray-700
+                      leading-tight
+                      focus:outline-none
+                      focus:shadow-outline
+                    "
                     :id="`ex${selectedExerciseIndex}validationInput-${index}`"
                     type="text"
                     :value="val.input"
@@ -205,7 +342,19 @@
                   </label>
                   <input
                     :id="`ex${selectedExerciseIndex}validationSolution-${index}`"
-                    class="ml-2 appearance-none border rounded py-2 px-2 w-10 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    class="
+                      ml-2
+                      appearance-none
+                      border
+                      rounded
+                      py-2
+                      px-2
+                      w-10
+                      text-gray-700
+                      leading-tight
+                      focus:outline-none
+                      focus:shadow-outline
+                    "
                     type="text"
                     :value="val.solution"
                   />
@@ -236,7 +385,19 @@
                 Available time to complete the exercise:
               </label>
               <input
-                class="ml-2 appearance-none border rounded py-2 px-3 w-20 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                class="
+                  ml-2
+                  appearance-none
+                  border
+                  rounded
+                  py-2
+                  px-3
+                  w-20
+                  text-gray-700
+                  leading-tight
+                  focus:outline-none
+                  focus:shadow-outline
+                "
                 :id="`ex${selectedExerciseIndex}Time`"
                 type="number"
                 v-model.number="
@@ -253,7 +414,19 @@
                 Type of exercise:
               </label>
               <input
-                class="ml-2 appearance-none border rounded py-2 px-3 w-40 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                class="
+                  ml-2
+                  appearance-none
+                  border
+                  rounded
+                  py-2
+                  px-3
+                  w-40
+                  text-gray-700
+                  leading-tight
+                  focus:outline-none
+                  focus:shadow-outline
+                "
                 :id="`ex${selectedExerciseIndex}Type`"
                 type="text"
                 v-model="
@@ -267,7 +440,19 @@
                 Language:
               </label>
               <select
-                class="ml-2 appearance-none border rounded py-2 px-3 w-30 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                class="
+                  ml-2
+                  appearance-none
+                  border
+                  rounded
+                  py-2
+                  px-3
+                  w-30
+                  text-gray-700
+                  leading-tight
+                  focus:outline-none
+                  focus:shadow-outline
+                "
                 name="Choose the Language"
                 id="language"
               >
@@ -277,7 +462,17 @@
             </div>
             <div class="mt-4 max-w-xl mx-auto relative">
               <button
-                class="mt-3 mr-3 rounded-full bg-gray-200 p-2 px-5 hover:bg-gray-300 focus:outline-none focus:shadow-outline"
+                class="
+                  mt-3
+                  mr-3
+                  rounded-full
+                  bg-gray-200
+                  p-2
+                  px-5
+                  hover:bg-gray-300
+                  focus:outline-none
+                  focus:shadow-outline
+                "
                 @click="playDemoExercise()"
               >
                 <img
@@ -289,7 +484,21 @@
                 </p>
               </button>
               <button
-                class="mt-3 rounded-full bg-gray-100 hover:bg-red-200 border hover:border-red-300 p-2 px-5 absolute right-0 bottom-0 focus:outline-none focus:shadow-outline"
+                class="
+                  mt-3
+                  rounded-full
+                  bg-gray-100
+                  hover:bg-red-200
+                  border
+                  hover:border-red-300
+                  p-2
+                  px-5
+                  absolute
+                  right-0
+                  bottom-0
+                  focus:outline-none
+                  focus:shadow-outline
+                "
                 @click="removeExercise()"
               >
                 <img src="@/assets/icons/delete_bin.png" class="w-5" />
@@ -297,12 +506,90 @@
             </div>
           </div>
           <button
-            class="mt-3 rounded-full bg-orange-400 p-2 px-5 focus:outline-none focus:shadow-outline"
+            class="
+              mt-3
+              rounded-full
+              bg-orange-400
+              p-2
+              px-5
+              focus:outline-none
+              focus:shadow-outline
+            "
             @click="updateTest()"
           >
             Update test
           </button>
         </div>
+      </div>
+    </div>
+    <div
+      v-if="badInput"
+      class="fixed h-full w-full top-0 z-50 flex justify-center items-center"
+      style="backdrop-filter: blur(2px)"
+    >
+      <div
+        class="
+          border-teal-600
+          p-8
+          border-t-8
+          bg-white
+          mb-6
+          rounded-md
+          shadow-lg
+          m-5
+          w-2/3
+        "
+      >
+        <h1 class="font-bold text-2xl mb-4">Bad Input!</h1>
+        <button
+          class="
+            mt-3
+            rounded-full
+            bg-orange-400
+            p-2
+            px-5
+            focus:outline-none
+            focus:shadow-outline
+          "
+          @click="wrongInput()"
+        >
+          close
+        </button>
+      </div>
+    </div>
+    <div
+      v-if="existsInput"
+      class="fixed h-full w-full top-0 z-50 flex justify-center items-center"
+      style="backdrop-filter: blur(2px)"
+    >
+      <div
+        class="
+          border-teal-600
+          p-8
+          border-t-8
+          bg-white
+          mb-6
+          rounded-md
+          shadow-lg
+          m-5
+          w-2/3
+        "
+      >
+        <h1 class="font-bold text-2xl mb-4">That Input already exists!</h1>
+        <button
+          class="
+            mt-3
+            rounded-full
+            bg-orange-400
+            p-2
+            px-5
+            focus:outline-none
+            focus:shadow-outline
+          "
+          @click="containsInput()"
+        >
+          close
+        </button>
       </div>
     </div>
   </div>
@@ -329,6 +616,8 @@ export default {
       selectedExercise: 0,
       selectedValidation: {},
       language: "",
+      badInput: false,
+      existsInput: false,
     };
   },
   methods: {
@@ -336,9 +625,9 @@ export default {
       localStorage.demoExercise = JSON.stringify(
         this.tests[this.selectedTest].exercises[this.selectedExerciseIndex]
       );
-      var language = document.getElementById("language").value;
-      console.log(language);
-      localStorage.setItem("language", language);
+      // var language = document.getElementById("language").value;
+      // console.log(language);
+      // localStorage.setItem("language", language);
       this.$router.push({
         path: `/playground`,
       });
@@ -450,21 +739,24 @@ export default {
     },
     newValidation() {
       var input = parseInt(document.getElementById("inputNewInput").value);
-      var solution = parseInt(document.getElementById("inputNewSolution").value);
+      var solution = parseInt(
+        document.getElementById("inputNewSolution").value
+      );
       var contains = false;
       Array.from(
-        this.tests[this.selectedTest].exercises[
-          this.selectedExerciseIndex
-        ].validations).forEach((e) => {
-          if (e.input == input) {
-            contains= true;
-          }
+        this.tests[this.selectedTest].exercises[this.selectedExerciseIndex]
+          .validations
+      ).forEach((e) => {
+        if (e.input == input) {
+          contains = true;
         }
-      );
-      if (input == "" || isNaN( input) || solution == "" || isNaN(solution)) {
+      });
+      if (input == "" || isNaN(input) || solution == "" || isNaN(solution)) {
         console.error("Input or Solution cannot be empty");
+        this.badInput = true;
       } else if (contains) {
         console.error("That input already exists");
+        this.existsInput = true;
       } else {
         fetch(
           `${process.env.VUE_APP_TC_API}/tests/` +
@@ -616,14 +908,21 @@ export default {
         }
       });
     },
+    wrongInput() {
+      this.badInput = false;
+    },
+    containsInput() {
+      this.existsInput = false;
+    },
     removeValidation(id) {
       var name = this.tests[this.selectedTest].name;
       fetch(
         `${process.env.VUE_APP_TC_API}/tests/` +
           name +
           "/exercises/" +
-          this.selectedExerciseIndex+
-          "/validations/" +id,
+          this.selectedExerciseIndex +
+          "/validations/" +
+          id,
         {
           method: "DELETE",
           headers: {
@@ -632,8 +931,9 @@ export default {
         }
       ).then((response) => {
         if (response.status == 200) {
-          this.tests[this.selectedTest].exercises[this.selectedExercise]
-          .validations.splice(parseInt(id), 1);
+          this.tests[this.selectedTest].exercises[
+            this.selectedExercise
+          ].validations.splice(parseInt(id), 1);
           this.loadTests();
         }
       });

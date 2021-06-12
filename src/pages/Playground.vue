@@ -346,6 +346,8 @@ export default {
     },
     loadTest(pack) {
       dbg("EVENT loadTest", pack);
+      dbg("TEST: "+JSON.stringify(pack));
+
       this.finished = false;
       this.loadingTest = true;
       this.starting = false;
@@ -364,7 +366,7 @@ export default {
     },
     newExercise(pack) {
       dbg("EVENT newExercise", pack);
-
+      dbg("EXERCISE " + JSON.stringify(pack));
       this.loadingTest = false;
       this.starting = false;
       this.timePassed = 0;
@@ -576,6 +578,7 @@ export default {
     },
     loadDemoExercise() {
       dbg("method loadDemoExercise - init");
+      dbg(demoExercise.toString());
       const demoExercise = JSON.parse(localStorage.demoExercise);
       this.starting = false;
       this.maxTime = demoExercise.time;
@@ -602,6 +605,7 @@ export default {
     },
     pack(data) {
       dbg("method pack - init", data);
+      dbg("pack method data: "+data)
       return {
         rid: this.rid,
         uid: this.uid,
@@ -704,11 +708,11 @@ export default {
   },
   mounted() {
     dbg("mounted - init");
-    this.language = true;
-    if (localStorage.getItem("language") == "Python") {
-      this.language = false;
-    }
-    console.log("Si true -> JS, sino Python: " + this.language);
+    // this.language = true;
+    // if (localStorage.getItem("language") == "Python") {
+    //   this.language = false;
+    // }
+    // console.log("Si true -> JS, sino Python: " + this.language);
 
     this.$refs.cmEditor.codemirror.on("change", this.onCmCodeChange);
     this.$refs.cmEditor.codemirror.on("cursorActivity", this.cursorActivity);
@@ -740,7 +744,7 @@ export default {
     this.$refs.timeBar.style.width = `${
       ((this.maxTime - this.timePassed) / this.maxTime) * 100
     }%`;
-
+    dbg(localStorage.demoExercise);
     if (localStorage.demoExercise) {
       this.loadDemoExercise();
     }
