@@ -433,7 +433,7 @@
                   tests[selectedTest].exercises[selectedExerciseIndex].type
                 "
               />
-              <label
+              <!-- <label
                 class="align-middle text-gray-700 text-sm font-bold mb-2"
                 for="type"
               >
@@ -458,7 +458,7 @@
               >
                 <option selected value="JavaScript">JavaScript</option>
                 <option value="Python">Python</option>
-              </select>
+              </select> -->
             </div>
             <div class="mt-4 max-w-xl mx-auto relative">
               <button
@@ -833,6 +833,7 @@ export default {
           exercise.time = document.getElementById("ex" + index + "Time").value;
           exercise.type = document.getElementById("ex" + index + "Type").value;
           exercise.validations = finalValidations;
+          
         });
       } catch (e) {
         console.log("No exercises found: " + e.toString());

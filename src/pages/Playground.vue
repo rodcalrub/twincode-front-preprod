@@ -17,8 +17,7 @@
         <div class="w-2/3 p-2">
           <div>{{ (maxTime - timePassed) | secondsToString }}</div>
           <div v-html="exerciseDescription"></div>
-          <div style="height: 70vh;" @keyup.ctrl.83="validate" v-if="language" >
-            Language(JavaScript): {{ language }}
+          <div style="height: 70vh;" @keyup.ctrl.83="validate">
             <div
               ref="pairCursor"
               id="pairCursor"
@@ -37,26 +36,7 @@
             <pre>}</pre>
             <br/>
           </div>
-          <div style="height: 70vh;" @keyup.ctrl.83="validate" v-else >
-            <div
-              ref="pairCursor"
-              id="pairCursor"
-              class="absolute bg-yellow-500 hidden"
-            ></div>
-            <br/>
-            Language(Python): {{ language }}
-            <pre><p class="text-purple-800 inline">def</p> main(input):</pre>
-            <codemirror
-              ref="cmEditor"
-              v-model="code"
-              id="codemirror"
-              :options="cmOption"
-              :events="['inputRead', 'change']"
-            ></codemirror>
-            <pre>     <p class="text-pink-700 inline">return</p> output</pre>
-            <pre></pre>
-            <br/>
-          </div>
+
           <div
             v-if="isExerciseCorrect"
             class="flex bg-green-200 p-3 mt-5 rounded-md border text-gray-800"
@@ -347,14 +327,12 @@ export default {
     loadTest(pack) {
       dbg("EVENT loadTest", pack);
       dbg("TEST: "+JSON.stringify(pack));
-
       this.finished = false;
       this.loadingTest = true;
       this.starting = false;
       this.testDescription = pack.data.testDescription;
       this.peerChange = pack.data.peerChange;
       this.$refs.messageContainer.innerHTML = "";
-      this.validations = pack.data.validations;
       this.code = "";
       this.clearResult();
     },
@@ -366,7 +344,7 @@ export default {
     },
     newExercise(pack) {
       dbg("EVENT newExercise", pack);
-      dbg("EXERCISE " + JSON.stringify(pack));
+      dbg("EXERCISE " + JSON.stringify(pack.data));
       this.loadingTest = false;
       this.starting = false;
       this.timePassed = 0;
@@ -377,7 +355,7 @@ export default {
       this.exerciseDescription = pack.data.exerciseDescription;
       this.exerciseType = pack.data.exerciseType;
       this.maxTime = pack.data.maxTime;
-      this.inputs = pack.data.inputs;
+      this.validations = pack.data.validations;
       this.clearResult();
     },
     reconnect() {
@@ -482,7 +460,7 @@ export default {
       this.clearResult();
       try {
         var solutions = [];
-        if (this.language) {
+        dbg(this.validations);
           this.validations.forEach((val) => {
             solutions.push(
               eval(
@@ -494,21 +472,11 @@ export default {
               )
             );
           });
-        } else {
-          var result = codemirror(this.code, {
-            lineNumbers: true,
-            mode: "python",
-          });
-          console.log("RESULTADO: "+result);
-          // brython({debug:1, ids:['hello']});
-        }
-
+        
         this.validations.forEach((input) => {
           console.log("Input: " + JSON.stringify(input.input));
         });
         console.log("Outputs: " + JSON.stringify(solutions));
-
-        console.log(solutions);
 
         this.valid(solutions[0]);
       } catch (e) {
@@ -528,12 +496,13 @@ export default {
     },
     valid(v) {
       dbg("method valid - init", v);
+      console.log(localStorage.token);
       if (this.exerciseType != "DEMO") {
         fetch(process.env.VUE_APP_TC_API + "/verify", {
           method: "POST",
           body: JSON.stringify({
-            solutions: v,
-            user: localStorage.token,
+            solution: v,
+            user: Number.parseInt(localStorage.token),
             source:
               "function main(input) { " +
               this.$refs.cmEditor.codemirror.getValue() +
@@ -604,8 +573,7 @@ export default {
       }, 1000);
     },
     pack(data) {
-      dbg("method pack - init", data);
-      dbg("pack method data: "+data)
+      // dbg("method pack - init", data);
       return {
         rid: this.rid,
         uid: this.uid,

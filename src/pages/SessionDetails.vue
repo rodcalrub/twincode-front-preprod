@@ -275,6 +275,7 @@ export default {
           }
         })
         .then((retrievedSession) => {
+          console.log("Retrieved Session: ",JSON.stringify(retrievedSession));
           if (retrievedSession) {
             this.session.name = retrievedSession.name;
             this.session.tokens = retrievedSession.tokens;
