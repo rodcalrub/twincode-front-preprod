@@ -124,10 +124,7 @@
           v-if="finishLoading"
           class="p-3 text-left max-w-4xl mx-auto mb-20 relative"
         >
-          <div
-            v-for="(room, index) in participants"
-            :key="index"
-          >
+          <div v-for="(room, index) in participants" :key="index">
             <div v-if="series[index] != null">
               <p>Room {{ index }}:</p>
               <div id="chart">
@@ -149,6 +146,10 @@
 <script>
 import Header from "../components/Header";
 import VueApexCharts from "vue-apexcharts";
+import Vue from 'vue'
+import VuePapaParse from 'vue-papa-parse'
+Vue.use(VuePapaParse)
+
 export default {
   components: {
     Header,
@@ -270,6 +271,27 @@ export default {
           this.reports.push(reportsRaw);
         });
     },
+    writeCsv(userOrdered) {
+      var keys = Object.keys(userOrdered[0]);
+      var header = [];
+      for (let n = 0; n < keys.length; n++) {
+        header.push({
+          id: keys[n],
+          title: keys[n].toUpperCase(),
+        });
+      }
+      return header;
+      // // Passing the column names intp the module
+      // const csvWriter = createCsvWriter({
+      //   // Output csv file name is geek_data
+      //   path: "data.csv",
+      //   header: header,
+      // });
+      // // Writerecords function to add records
+      // csvWriter
+      //   .writeRecords(userOrdered)
+      //   .then(() => console.log("Data uploaded into csv successfully"));
+    },
     loadReports(user, room) {
       fetch(`${process.env.VUE_APP_TC_API}/users/${user}/reports`, {
         method: "GET",
@@ -324,6 +346,40 @@ export default {
           break;
       }
       this.callData(this.$route.params.sessionName, type);
+    },
+    loadDataset() {
+      fetch(
+        `${process.env.VUE_APP_TC_API}/dataset/` +
+          this.$route.params.sessionName,
+        {
+          method: "GET",
+          headers: {
+            Authorization: localStorage.adminSecret,
+          },
+        }
+      )
+        .then((response) => {
+          return response.json();
+        })
+        .then((response) => {
+          console.log(response);
+          let filename = "r.csv";
+          let text = this.$papa.unparse(response);
+
+          let element = document.createElement("a");
+          element.setAttribute(
+            "href",
+            "data:text/csv;charset=utf-8," + encodeURIComponent(text)
+          );
+          element.setAttribute("download", filename);
+
+          element.style.display = "none";
+          document.body.appendChild(element);
+
+          element.click();
+          document.body.removeChild(element);
+          return response;
+        });
     },
   },
   mounted() {
