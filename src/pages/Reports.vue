@@ -11,7 +11,15 @@
 
         <div class="p-3">
           <button
-            class="border rounded-md p-5 hover:text-indigo-900 hover:bg-indigo-100 hover:border-indigo-400 mx-2"
+            class="
+              border
+              rounded-md
+              p-5
+              hover:text-indigo-900
+              hover:bg-indigo-100
+              hover:border-indigo-400
+              mx-2
+            "
             @click="loadData('messages')"
           >
             Load messages
@@ -21,7 +29,15 @@
             />
           </button>
           <button
-            class="border rounded-md p-5 hover:text-green-900 hover:bg-green-100 hover:border-green-400 mx-2"
+            class="
+              border
+              rounded-md
+              p-5
+              hover:text-green-900
+              hover:bg-green-100
+              hover:border-green-400
+              mx-2
+            "
             @click="loadData('rights')"
           >
             Load right tries
@@ -31,7 +47,15 @@
             />
           </button>
           <button
-            class="border rounded-md p-5 hover:text-red-900 hover:bg-red-100 hover:border-red-400 mx-2"
+            class="
+              border
+              rounded-md
+              p-5
+              hover:text-red-900
+              hover:bg-red-100
+              hover:border-red-400
+              mx-2
+            "
             @click="loadData('wrongs')"
           >
             Load wrong tries
@@ -41,7 +65,15 @@
             />
           </button>
           <button
-            class="border rounded-md p-5 hover:text-yellow-900 hover:bg-yellow-100 hover:border-yellow-400 mx-2"
+            class="
+              border
+              rounded-md
+              p-5
+              hover:text-yellow-900
+              hover:bg-yellow-100
+              hover:border-yellow-400
+              mx-2
+            "
             @click="loadData('inputs')"
           >
             Load code additions
@@ -51,13 +83,39 @@
             />
           </button>
           <button
-            class="border rounded-md p-5 hover:text-purple-900 hover:bg-purple-100 hover:border-purple-400 mx-2"
+            class="
+              border
+              rounded-md
+              p-5
+              hover:text-purple-900
+              hover:bg-purple-100
+              hover:border-purple-400
+              mx-2
+            "
             @click="loadData('deletions')"
           >
             Load code deletions
             <img
               class="w-8 mt-3 mx-auto"
               src="https://img.icons8.com/ios/50/000000/delete-key.png"
+            />
+          </button>
+          <button
+            class="
+              border
+              rounded-md
+              p-5
+              hover:text-indigo-900
+              hover:bg-indigo-100
+              hover:border-indigo-400
+              mx-2
+            "
+            @click="loadDataset()"
+          >
+            Load statistics
+            <img
+              class="w-8 mt-3 mx-auto"
+              src="https://img.icons8.com/ios/50/000000/statistics.png"
             />
           </button>
         </div>
@@ -67,18 +125,19 @@
           class="p-3 text-left max-w-4xl mx-auto mb-20 relative"
         >
           <div
-            class="border p-3 rounded-md"
             v-for="(room, index) in participants"
             :key="index"
           >
-            <p>Room {{ index }}:</p>
-            <div id="chart">
-              <apexchart
-                type="bar"
-                height="350"
-                :options="chartOptions"
-                :series="series[index]"
-              ></apexchart>
+            <div v-if="series[index] != null">
+              <p>Room {{ index }}:</p>
+              <div id="chart">
+                <apexchart
+                  type="bar"
+                  height="350"
+                  :options="chartOptions"
+                  :series="series[index]"
+                ></apexchart>
+              </div>
             </div>
           </div>
         </div>
