@@ -271,27 +271,6 @@ export default {
           this.reports.push(reportsRaw);
         });
     },
-    writeCsv(userOrdered) {
-      var keys = Object.keys(userOrdered[0]);
-      var header = [];
-      for (let n = 0; n < keys.length; n++) {
-        header.push({
-          id: keys[n],
-          title: keys[n].toUpperCase(),
-        });
-      }
-      return header;
-      // // Passing the column names intp the module
-      // const csvWriter = createCsvWriter({
-      //   // Output csv file name is geek_data
-      //   path: "data.csv",
-      //   header: header,
-      // });
-      // // Writerecords function to add records
-      // csvWriter
-      //   .writeRecords(userOrdered)
-      //   .then(() => console.log("Data uploaded into csv successfully"));
-    },
     loadReports(user, room) {
       fetch(`${process.env.VUE_APP_TC_API}/users/${user}/reports`, {
         method: "GET",
@@ -362,8 +341,7 @@ export default {
           return response.json();
         })
         .then((response) => {
-          console.log(response);
-          let filename = "r.csv";
+          let filename =  this.$route.params.sessionName+".csv";
           let text = this.$papa.unparse(response);
 
           let element = document.createElement("a");
