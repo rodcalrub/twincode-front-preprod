@@ -1,5 +1,6 @@
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
+import Analysis from "./pages/Analysis";
 import Lobby from "./pages/Lobby";
 import Playground from "./pages/Playground";
 import Admin from "./pages/Admin";
@@ -75,6 +76,12 @@ const routes = [
     component: PageNotFound,
     name: "404",
     meta: { title: "Not found" },
+  },
+  {
+    path: "/administration/analyze/:sesion/show",
+    component: Analysis,
+    name: "Analysis",
+    meta: { title: "Analysis" },
   },
 ];
 

@@ -118,6 +118,51 @@
               src="https://img.icons8.com/ios/50/000000/statistics.png"
             />
           </button>
+          <button
+            class="
+              border
+              rounded-md
+              p-5
+              hover:text-indigo-900
+              hover:bg-indigo-100
+              hover:border-indigo-400
+              mx-2
+            "
+            @click="loadAnalysis()"
+          >
+            Load analysis
+            <img class="w-8 mt-3 mx-auto" src="" />
+          </button>
+          <!-- <div>
+            <data-table v-bind="parametersTable2" />
+          </div> -->
+          <div
+            v-if="finishAnalysis"
+            class="p-3 text-left max-w-4xl mx-auto mb-20 relative"
+          >
+            <div>
+              <data-table v-bind="parametersTable1()" />
+            </div>
+            <table
+              id="myTable"
+              class="display table-bordered nowrap"
+              cellspacing="0"
+              width="100%"
+            >
+              <thead>
+                <th v-for="title in columnTitles" :key="title">
+                  {{ title }}
+                </th>
+              </thead>
+              <tbody v-for="(user, index) in users" v-bind:key="index">
+                <tr>
+                  <td v-for="values in user" v-bind:key="values">
+                    {{ values }}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
         <!-- Content -->
         <div
@@ -146,14 +191,68 @@
 <script>
 import Header from "../components/Header";
 import VueApexCharts from "vue-apexcharts";
-import Vue from 'vue'
-import VuePapaParse from 'vue-papa-parse'
-Vue.use(VuePapaParse)
+import Vue from "vue";
+import DataTable from "@andresouzaabreu/vue-data-table";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "@andresouzaabreu/vue-data-table/dist/DataTable.css";
 
+import users from "./users.js";
+
+Vue.component("data-table", DataTable);
 export default {
   components: {
     Header,
+    DataTable,
     apexchart: VueApexCharts,
+  },
+  computed: {
+    // parametersTable1() {
+    //   return {
+    //     data: users2,
+    //     actionMode: "multiple",
+    //     columnKeys: [
+    //       "id",
+    //       "code",
+    //       "mail",
+    //       "gender",
+    //       "birthDate",
+    //       "subject",
+    //       "beganStudying",
+    //       "numberOfSubjects",
+    //       "knownLanguages",
+    //       "signedUpOn",
+    //       "token",
+    //       "room",
+    //       "token",
+    //       "blind",
+    //       "jsexp",
+    //     ],
+    //   };
+    // },
+    parametersTable2() {
+      return {
+        data: users,
+        actionMode: "multiple",
+        columnKeys: [
+          "id",
+          "code",
+          "mail",
+          "gender",
+          "birthDate",
+          "subject",
+          "beganStudying",
+          "beganStudying",
+          "numberOfSubjects",
+          "knownLanguages",
+          "signedUpOn",
+          "token",
+          "room",
+          "token",
+          "blind",
+          "jsexp",
+        ],
+      };
+    },
   },
   data() {
     return {
@@ -162,6 +261,7 @@ export default {
       series: [],
       participants: [],
       finishLoading: false,
+      finishAnalysis: false,
       chartOptions: {
         chart: {
           type: "bar",
@@ -206,6 +306,37 @@ export default {
     };
   },
   methods: {
+    parametersTable1() {
+      // var users2 = this.users;
+      // var f = this.users.map(JSON.parse);
+      // var uno = JSON.parse(this.users[0]);
+      // console.log(JSON.stringify(users));
+      // console.log(f);
+      console.log(this.users);
+      console.log(this.users[0]);
+      var uno = this.users[0];
+      console.log(JSON.stringify(uno));
+      return {
+        data: users,
+        columnKeys: [
+          "id",
+          "code",
+          "mail",
+          "gender",
+          "birthDate",
+          "subject",
+          "beganStudying",
+          "numberOfSubjects",
+          "knownLanguages",
+          "signedUpOn",
+          "token",
+          "room",
+          "token",
+          "blind",
+          "jsexp",
+        ],
+      };
+    },
     loadTests() {
       fetch(
         `${process.env.VUE_APP_TC_API}/tests/${this.$route.params.sessionName}`,
@@ -341,7 +472,7 @@ export default {
           return response.json();
         })
         .then((response) => {
-          let filename =  this.$route.params.sessionName+".csv";
+          let filename = this.$route.params.sessionName + ".csv";
           let text = this.$papa.unparse(response);
 
           let element = document.createElement("a");
@@ -357,6 +488,103 @@ export default {
           element.click();
           document.body.removeChild(element);
           return response;
+        });
+    },
+    loadAnalysis() {
+      console.log("Loading analysis...");
+      fetch(
+        `${process.env.VUE_APP_TC_API}/analyze/` +
+          this.$route.params.sessionName +
+          "/show",
+        {
+          method: "GET",
+          headers: {
+            Authorization: localStorage.adminSecret,
+          },
+        }
+      )
+        .then((response) => {
+          return response.json();
+        })
+        .then((data) => {
+          this.finishAnalysis = true;
+          // var $ = require("jquery");
+
+          const usersArray = [];
+          const columnTitles = [];
+          for (let user in data) {
+            var userObj = {};
+            for (let key in data[user]) {
+              if (key == '"BIRTHDATE"') {
+                userObj['"birthDate"'] = data[user][key];
+              }
+              if (key == '"BEGANSTUDYING"') {
+                userObj['"beganStudying"'] = data[user][key];
+              }
+              if (key == '"NUMBEROFSUBJECTS"') {
+                userObj['"numberOfSubjects"'] = data[user][key];
+              }
+              if (key == '"KNOWNKLANGUAGES"') {
+                userObj['"knownLanguages"'] = data[user][key];
+              } else if (key.toLowerCase() == '""') {
+                userObj['"id"'] = data[user][key];
+              } else {
+                userObj[key.toLowerCase()] = data[user][key];
+              }
+            }
+            usersArray.push(userObj);
+          }
+          for (let title in data[0]) {
+            columnTitles.push(title);
+          }
+          this.users = usersArray;
+          this.columnTitles = columnTitles;
+
+          // this.dataTable = $("#myTable");
+          // this.dataTable.DataTable({
+          //   data: this.users,
+          //   columns: [
+          //     { label: "id", field: "id" },
+          //     { label: "code", field: "code" },
+          //     { label: "mail", field: "mail" },
+          //     { label: "gender", field: "gender" },
+          //     { label: "birthDate", field: "birthDate" },
+          //     { label: "subject", field: "subject" },
+          //     { label: "beganStudying", field: "beganStudying" },
+          //     { label: "beganStudying", field: "beganStudying" },
+          //     { label: "numberOfSubjects", field: "numberOfSubjects" },
+          //     { label: "knownLanguages", field: "knownLanguages" },
+          //     { label: "signedUpOn", field: "signedUpOn" },
+          //     { label: "token", field: "token" },
+          //     { label: "room", field: "room" },
+          //     { label: "token", field: "token" },
+          //     { label: "blind", field: "blind" },
+          //     { label: "jsexp", field: "jsexp" },
+          //     { label: "data", field: "data" },
+          //   ],
+          // });
+          // // data.forEach((user) => {
+          //   this.dataTable.row
+          //     .add([user.code, user.mail, user.gender])
+          //     .draw(false);
+          // });
+
+          // let filename =  this.$route.params.sessionName+".csv";
+          // let text = this.$papa.unparse(response);
+
+          // let element = document.createElement("a");
+          // element.setAttribute(
+          //   "href",
+          //   "data:text/csv;charset=utf-8," + encodeURIComponent(text)
+          // );
+          // element.setAttribute("download", filename);
+
+          // element.style.display = "none";
+          // document.body.appendChild(element);
+
+          // element.click();
+          // document.body.removeChild(element);
+          // return response;
         });
     },
   },
