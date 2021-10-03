@@ -1,7 +1,7 @@
 export default [
     {
         "id": '2',
-        "code": "376",
+        "code": '376',
         "mail": "a@",
         "gender": "female",
         "birthDate": "Tue Dec 11 1990 01:00:00 GMT+0100 (hora estándar de Europa central)",

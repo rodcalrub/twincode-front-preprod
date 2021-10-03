@@ -143,7 +143,7 @@
             <div>
               <data-table v-bind="parametersTable1()" />
             </div>
-            <table
+            <!-- <table
               id="myTable"
               class="display table-bordered nowrap"
               cellspacing="0"
@@ -161,7 +161,7 @@
                   </td>
                 </tr>
               </tbody>
-            </table>
+            </table> -->
           </div>
         </div>
         <!-- Content -->
@@ -307,17 +307,66 @@ export default {
   },
   methods: {
     parametersTable1() {
+      var f = [];
       // var users2 = this.users;
-      // var f = this.users.map(JSON.parse);
+      // var users3 = users;
+      console.log(users);
+      console.log(users);
+      this.users.map((x) => f.push(x));
+      console.log(f);
       // var uno = JSON.parse(this.users[0]);
       // console.log(JSON.stringify(users));
-      // console.log(f);
-      console.log(this.users);
-      console.log(this.users[0]);
-      var uno = this.users[0];
-      console.log(JSON.stringify(uno));
+      console.log(typeof f);
+      // var user1 = [
+      //   {
+      //     id: "2",
+      //     code: "376",
+      //     mail: "a@",
+      //     gender: "female",
+      //     birthDate:
+      //       "Tue Dec 11 1990 01:00:00 GMT+0100 (hora estándar de Europa central)",
+      //     birthdate:
+      //       "Tue Dec 11 1990 01:00:00 GMT+0100 (hora estándar de Europa central)",
+      //     subject: "Pre-production",
+      //     beganStudying: "2019",
+      //     beganstudying: "2019",
+      //     numberOfSubjects: "10",
+      //     numberofsubjects: "10",
+      //     knownlanguages: "JavaScript",
+      //     signedupon:
+      //       "Mon Apr 13 2020 18:24:05 GMT+0200 (hora de verano de Europa central)",
+      //     token: "333",
+      //     room: "100",
+      //     blind: "false",
+      //     jsexp: "NA",
+      //     "messages1.1": "7",
+      //     "messages2.1": "0",
+      //     "messages1.1.t": "22",
+      //     "messages2.1.t": "1",
+      //     "rights1.1": "0",
+      //     "rights2.1": "1",
+      //     "rights1.1.t": "8",
+      //     "rights2.1.t": "7",
+      //     "deletions1.1": "3",
+      //     "deletions2.1": "0",
+      //     "deletions1.1.t": "57",
+      //     "deletions2.1.t": "0",
+      //     "inputs1.1": "37",
+      //     "inputs2.1": "0",
+      //     "inputs1.1.t": "445",
+      //     "inputs2.1.t": "0",
+      //     "wrongs1.1": "2",
+      //     "wrongs2.1": "0",
+      //     "wrongs1.1.t": "21",
+      //     "wrongs2.1.t": "4",
+      //   },
+      // ];
+      // console.log(this.users);
+      // console.log(this.users[0]);
+      // var uno = this.users[0];
+      // console.log(JSON.stringify(uno));
       return {
-        data: users,
+        data: this.users,
         columnKeys: [
           "id",
           "code",
@@ -516,22 +565,30 @@ export default {
             var userObj = {};
             for (let key in data[user]) {
               if (key == '"BIRTHDATE"') {
-                userObj['"birthDate"'] = data[user][key];
+                userObj[["birthDate"]] = data[user][key];
+                // userObj.push({["birthDate"] : data[user][key]});
               }
               if (key == '"BEGANSTUDYING"') {
-                userObj['"beganStudying"'] = data[user][key];
+                // userObj.push({["beganStudying"] : data[user][key]});
+                 userObj[["beganStudying"]] = data[user][key];
               }
               if (key == '"NUMBEROFSUBJECTS"') {
-                userObj['"numberOfSubjects"'] = data[user][key];
+                // userObj.push({["numberOfSubjects"] : data[user][key]});
+                 userObj[["numberOfSubjects"]] = data[user][key];
               }
               if (key == '"KNOWNKLANGUAGES"') {
-                userObj['"knownLanguages"'] = data[user][key];
+                // userObj.push({["knownLanguages"] : data[user][key]});
+                 userObj[["knownLanguages"]] = data[user][key];
               } else if (key.toLowerCase() == '""') {
-                userObj['"id"'] = data[user][key];
+                // userObj.push({["id"] : data[user][key]});
+                userObj[["id"]] = data[user][key];
               } else {
-                userObj[key.toLowerCase()] = data[user][key];
+                var k = key.toLowerCase();
+                userObj[JSON.parse(k)]= data[user][key];
               }
             }
+            console.log(userObj);
+            // usersArray.push(JSON.parse(o));
             usersArray.push(userObj);
           }
           for (let title in data[0]) {
