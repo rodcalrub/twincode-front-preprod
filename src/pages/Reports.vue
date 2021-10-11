@@ -130,7 +130,7 @@
             "
             @click="loadAnalysis()"
           >
-            Load analysis
+            Run analysis
             <img class="w-8 mt-3 mx-auto" src="" />
           </button>
           <!-- <div>
