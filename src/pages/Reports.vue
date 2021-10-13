@@ -133,6 +133,21 @@
             Run analysis
             <img class="w-8 mt-3 mx-auto" src="" />
           </button>
+          <button
+            class="
+              border
+              rounded-md
+              p-5
+              hover:text-indigo-900
+              hover:bg-indigo-100
+              hover:border-indigo-400
+              mx-2
+            "
+            @click="showAnalysis()"
+          >
+            Show analysis
+            <img class="w-8 mt-3 mx-auto" src="" />
+          </button>
           <!-- <div>
             <data-table v-bind="parametersTable2" />
           </div> -->
@@ -196,7 +211,7 @@ import DataTable from "@andresouzaabreu/vue-data-table";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "@andresouzaabreu/vue-data-table/dist/DataTable.css";
 
-import users from "./users.js";
+// import users from "./users.js";
 
 Vue.component("data-table", DataTable);
 export default {
@@ -229,30 +244,30 @@ export default {
     //     ],
     //   };
     // },
-    parametersTable2() {
-      return {
-        data: users,
-        actionMode: "multiple",
-        columnKeys: [
-          "id",
-          "code",
-          "mail",
-          "gender",
-          "birthDate",
-          "subject",
-          "beganStudying",
-          "beganStudying",
-          "numberOfSubjects",
-          "knownLanguages",
-          "signedUpOn",
-          "token",
-          "room",
-          "token",
-          "blind",
-          "jsexp",
-        ],
-      };
-    },
+    // parametersTable2() {
+    //   return {
+    //     data: users,
+    //     actionMode: "multiple",
+    //     columnKeys: [
+    //       "id",
+    //       "code",
+    //       "mail",
+    //       "gender",
+    //       "birthDate",
+    //       "subject",
+    //       "beganStudying",
+    //       "beganStudying",
+    //       "numberOfSubjects",
+    //       "knownLanguages",
+    //       "signedUpOn",
+    //       "token",
+    //       "room",
+    //       "token",
+    //       "blind",
+    //       "jsexp",
+    //     ],
+    //   };
+    // },
   },
   data() {
     return {
@@ -310,81 +325,88 @@ export default {
       var f = [];
       // var users2 = this.users;
       // var users3 = users;
-      console.log(users);
-      console.log(users);
-      this.users.map((x) => f.push(x));
-      console.log(f);
-      // var uno = JSON.parse(this.users[0]);
-      // console.log(JSON.stringify(users));
-      console.log(typeof f);
-      // var user1 = [
-      //   {
-      //     id: "2",
-      //     code: "376",
-      //     mail: "a@",
-      //     gender: "female",
-      //     birthDate:
-      //       "Tue Dec 11 1990 01:00:00 GMT+0100 (hora estándar de Europa central)",
-      //     birthdate:
-      //       "Tue Dec 11 1990 01:00:00 GMT+0100 (hora estándar de Europa central)",
-      //     subject: "Pre-production",
-      //     beganStudying: "2019",
-      //     beganstudying: "2019",
-      //     numberOfSubjects: "10",
-      //     numberofsubjects: "10",
-      //     knownlanguages: "JavaScript",
-      //     signedupon:
-      //       "Mon Apr 13 2020 18:24:05 GMT+0200 (hora de verano de Europa central)",
-      //     token: "333",
-      //     room: "100",
-      //     blind: "false",
-      //     jsexp: "NA",
-      //     "messages1.1": "7",
-      //     "messages2.1": "0",
-      //     "messages1.1.t": "22",
-      //     "messages2.1.t": "1",
-      //     "rights1.1": "0",
-      //     "rights2.1": "1",
-      //     "rights1.1.t": "8",
-      //     "rights2.1.t": "7",
-      //     "deletions1.1": "3",
-      //     "deletions2.1": "0",
-      //     "deletions1.1.t": "57",
-      //     "deletions2.1.t": "0",
-      //     "inputs1.1": "37",
-      //     "inputs2.1": "0",
-      //     "inputs1.1.t": "445",
-      //     "inputs2.1.t": "0",
-      //     "wrongs1.1": "2",
-      //     "wrongs2.1": "0",
-      //     "wrongs1.1.t": "21",
-      //     "wrongs2.1.t": "4",
-      //   },
-      // ];
-      // console.log(this.users);
-      // console.log(this.users[0]);
-      // var uno = this.users[0];
-      // console.log(JSON.stringify(uno));
-      return {
-        data: this.users,
-        columnKeys: [
-          "id",
-          "code",
-          "mail",
-          "gender",
-          "birthDate",
-          "subject",
-          "beganStudying",
-          "numberOfSubjects",
-          "knownLanguages",
-          "signedUpOn",
-          "token",
-          "room",
-          "token",
-          "blind",
-          "jsexp",
-        ],
-      };
+      // console.log(users);
+      if (!this.users) {
+        alert(
+          'The is no analysis, please run analysis by pressing "Run Analysis" button'
+        );
+        return 0;
+      } else {
+        this.users.map((x) => f.push(x));
+
+        // console.log(f);
+        // var uno = JSON.parse(this.users[0]);
+        // console.log(JSON.stringify(users));
+        // console.log(typeof f);
+        // var user1 = [
+        //   {
+        //     id: "2",
+        //     code: "376",
+        //     mail: "a@",
+        //     gender: "female",
+        //     birthDate:
+        //       "Tue Dec 11 1990 01:00:00 GMT+0100 (hora estándar de Europa central)",
+        //     birthdate:
+        //       "Tue Dec 11 1990 01:00:00 GMT+0100 (hora estándar de Europa central)",
+        //     subject: "Pre-production",
+        //     beganStudying: "2019",
+        //     beganstudying: "2019",
+        //     numberOfSubjects: "10",
+        //     numberofsubjects: "10",
+        //     knownlanguages: "JavaScript",
+        //     signedupon:
+        //       "Mon Apr 13 2020 18:24:05 GMT+0200 (hora de verano de Europa central)",
+        //     token: "333",
+        //     room: "100",
+        //     blind: "false",
+        //     jsexp: "NA",
+        //     "messages1.1": "7",
+        //     "messages2.1": "0",
+        //     "messages1.1.t": "22",
+        //     "messages2.1.t": "1",
+        //     "rights1.1": "0",
+        //     "rights2.1": "1",
+        //     "rights1.1.t": "8",
+        //     "rights2.1.t": "7",
+        //     "deletions1.1": "3",
+        //     "deletions2.1": "0",
+        //     "deletions1.1.t": "57",
+        //     "deletions2.1.t": "0",
+        //     "inputs1.1": "37",
+        //     "inputs2.1": "0",
+        //     "inputs1.1.t": "445",
+        //     "inputs2.1.t": "0",
+        //     "wrongs1.1": "2",
+        //     "wrongs2.1": "0",
+        //     "wrongs1.1.t": "21",
+        //     "wrongs2.1.t": "4",
+        //   },
+        // ];
+        // console.log(this.users);
+        // console.log(this.users[0]);
+        // var uno = this.users[0];
+        // console.log(JSON.stringify(uno));
+        return {
+          data: this.users,
+          columnKeys: [
+            "id",
+            "code",
+            "mail",
+            "gender",
+            "birthDate",
+            "subject",
+            "beganStudying",
+            "numberOfSubjects",
+            "knownLanguages",
+            "signedUpOn",
+            "token",
+            "room",
+            "token",
+            "blind",
+            "jsexp",
+          ],
+        };
+      }
     },
     loadTests() {
       fetch(
@@ -539,6 +561,13 @@ export default {
           return response;
         });
     },
+    showAnalysis() {
+      if (this.finishAnalysis) {
+        this.finishAnalysis = false;
+      } else {
+        this.finishAnalysis = true;
+      }
+    },
     loadAnalysis() {
       console.log("Loading analysis...");
       fetch(
@@ -570,21 +599,21 @@ export default {
               }
               if (key == '"BEGANSTUDYING"') {
                 // userObj.push({["beganStudying"] : data[user][key]});
-                 userObj[["beganStudying"]] = data[user][key];
+                userObj[["beganStudying"]] = data[user][key];
               }
               if (key == '"NUMBEROFSUBJECTS"') {
                 // userObj.push({["numberOfSubjects"] : data[user][key]});
-                 userObj[["numberOfSubjects"]] = data[user][key];
+                userObj[["numberOfSubjects"]] = data[user][key];
               }
               if (key == '"KNOWNKLANGUAGES"') {
                 // userObj.push({["knownLanguages"] : data[user][key]});
-                 userObj[["knownLanguages"]] = data[user][key];
+                userObj[["knownLanguages"]] = data[user][key];
               } else if (key.toLowerCase() == '""') {
                 // userObj.push({["id"] : data[user][key]});
                 userObj[["id"]] = data[user][key];
               } else {
                 var k = key.toLowerCase();
-                userObj[JSON.parse(k)]= data[user][key];
+                userObj[JSON.parse(k)] = data[user][key];
               }
             }
             console.log(userObj);
