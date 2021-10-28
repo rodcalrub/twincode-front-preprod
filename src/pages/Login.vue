@@ -72,6 +72,7 @@ export default {
   },
   methods: {
     onSubmit() {
+      console.log(process.env.VUE_APP_TC_API);
       fetch(process.env.VUE_APP_TC_API + "/joinSession?code=" + this.code).then(
         (response) => {
           if (response.status != 200) {

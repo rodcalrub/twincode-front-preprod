@@ -334,58 +334,7 @@ export default {
       } else {
         this.users.map((x) => f.push(x));
 
-        // console.log(f);
-        // var uno = JSON.parse(this.users[0]);
-        // console.log(JSON.stringify(users));
-        // console.log(typeof f);
-        // var user1 = [
-        //   {
-        //     id: "2",
-        //     code: "376",
-        //     mail: "a@",
-        //     gender: "female",
-        //     birthDate:
-        //       "Tue Dec 11 1990 01:00:00 GMT+0100 (hora estándar de Europa central)",
-        //     birthdate:
-        //       "Tue Dec 11 1990 01:00:00 GMT+0100 (hora estándar de Europa central)",
-        //     subject: "Pre-production",
-        //     beganStudying: "2019",
-        //     beganstudying: "2019",
-        //     numberOfSubjects: "10",
-        //     numberofsubjects: "10",
-        //     knownlanguages: "JavaScript",
-        //     signedupon:
-        //       "Mon Apr 13 2020 18:24:05 GMT+0200 (hora de verano de Europa central)",
-        //     token: "333",
-        //     room: "100",
-        //     blind: "false",
-        //     jsexp: "NA",
-        //     "messages1.1": "7",
-        //     "messages2.1": "0",
-        //     "messages1.1.t": "22",
-        //     "messages2.1.t": "1",
-        //     "rights1.1": "0",
-        //     "rights2.1": "1",
-        //     "rights1.1.t": "8",
-        //     "rights2.1.t": "7",
-        //     "deletions1.1": "3",
-        //     "deletions2.1": "0",
-        //     "deletions1.1.t": "57",
-        //     "deletions2.1.t": "0",
-        //     "inputs1.1": "37",
-        //     "inputs2.1": "0",
-        //     "inputs1.1.t": "445",
-        //     "inputs2.1.t": "0",
-        //     "wrongs1.1": "2",
-        //     "wrongs2.1": "0",
-        //     "wrongs1.1.t": "21",
-        //     "wrongs2.1.t": "4",
-        //   },
-        // ];
-        // console.log(this.users);
-        // console.log(this.users[0]);
-        // var uno = this.users[0];
-        // console.log(JSON.stringify(uno));
+      
         return {
           data: this.users,
           columnKeys: [
@@ -440,6 +389,8 @@ export default {
         });
     },
     loadReport(test, exercise) {
+            console.log(exercise);
+
       fetch(
         `${process.env.VUE_APP_TC_API}/tests/${this.$route.params.sessionName}/${test}/${exercise}/reports`,
         {
