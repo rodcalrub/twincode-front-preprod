@@ -131,7 +131,7 @@
             @click="loadAnalysis()"
           >
             Run analysis
-            <img class="w-8 mt-3 mx-auto" src="" />
+            <img class="w-8 mt-3 mx-auto" img src="https://img.icons8.com/ios/50/000000/run-command.png" />
           </button>
           <button
             class="
@@ -146,7 +146,7 @@
             @click="showAnalysis()"
           >
             Show analysis
-            <img class="w-8 mt-3 mx-auto" src="" />
+            <img class="w-8 mt-3 mx-auto" src="https://img.icons8.com/ios/50/000000/show-property.png" />
           </button>
           <!-- <div>
             <data-table v-bind="parametersTable2" />
@@ -540,32 +540,11 @@ export default {
           for (let user in data) {
             var userObj = {};
             for (let key in data[user]) {
-              // if (key == '"BIRTHDATE"') {
-              //   userObj[["birthDate"]] = data[user][key];
-              //   // userObj.push({["birthDate"] : data[user][key]});
-              // }
-              // if (key == '"BEGANSTUDYING"') {
-              //   // userObj.push({["beganStudying"] : data[user][key]});
-              //   userObj[["beganStudying"]] = data[user][key];
-              // }
-              // if (key == '"NUMBEROFSUBJECTS"') {
-              //   // userObj.push({["numberOfSubjects"] : data[user][key]});
-              //   userObj[["numberOfSubjects"]] = data[user][key];
-              // }
-              // if (key == '"KNOWNKLANGUAGES"') {
-              //   // userObj.push({["knownLanguages"] : data[user][key]});
-              //   userObj[["knownLanguages"]] = data[user][key];
-              // } else if (key.toLowerCase() == '""') {
-              //   // userObj.push({["id"] : data[user][key]});
-              //   userObj[["id"]] = data[user][key];
-              // } else {
                 var k = key.toLowerCase();
                 userObj[k] = data[user][key];
-                // userObj[JSON.parse(k)] = data[user][key];
               // }
             }
             console.log(userObj);
-            // usersArray.push(JSON.parse(o));
             usersArray.push(userObj);
           }
           for (let title in data[0]) {
@@ -573,52 +552,6 @@ export default {
           }
           this.users = usersArray;
           this.columnTitles = columnTitles;
-
-          // this.dataTable = $("#myTable");
-          // this.dataTable.DataTable({
-          //   data: this.users,
-          //   columns: [
-          //     { label: "id", field: "id" },
-          //     { label: "code", field: "code" },
-          //     { label: "mail", field: "mail" },
-          //     { label: "gender", field: "gender" },
-          //     { label: "birthDate", field: "birthDate" },
-          //     { label: "subject", field: "subject" },
-          //     { label: "beganStudying", field: "beganStudying" },
-          //     { label: "beganStudying", field: "beganStudying" },
-          //     { label: "numberOfSubjects", field: "numberOfSubjects" },
-          //     { label: "knownLanguages", field: "knownLanguages" },
-          //     { label: "signedUpOn", field: "signedUpOn" },
-          //     { label: "token", field: "token" },
-          //     { label: "room", field: "room" },
-          //     { label: "token", field: "token" },
-          //     { label: "blind", field: "blind" },
-          //     { label: "jsexp", field: "jsexp" },
-          //     { label: "data", field: "data" },
-          //   ],
-          // });
-          // // data.forEach((user) => {
-          //   this.dataTable.row
-          //     .add([user.code, user.mail, user.gender])
-          //     .draw(false);
-          // });
-
-          // let filename =  this.$route.params.sessionName+".csv";
-          // let text = this.$papa.unparse(response);
-
-          // let element = document.createElement("a");
-          // element.setAttribute(
-          //   "href",
-          //   "data:text/csv;charset=utf-8," + encodeURIComponent(text)
-          // );
-          // element.setAttribute("download", filename);
-
-          // element.style.display = "none";
-          // document.body.appendChild(element);
-
-          // element.click();
-          // document.body.removeChild(element);
-          // return response;
         });
     },
   },
