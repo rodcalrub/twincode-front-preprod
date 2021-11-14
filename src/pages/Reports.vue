@@ -342,17 +342,13 @@ export default {
             "code",
             "mail",
             "gender",
-            "birthDate",
+            "birthdate",
             "subject",
-            "beganStudying",
-            "numberOfSubjects",
-            "knownLanguages",
-            "signedUpOn",
-            "token",
+            "beganstudying",
+            "numberofsubjects",
+            "knownlanguages",
+            "signedupon",
             "room",
-            "token",
-            "blind",
-            "jsexp",
           ],
         };
       }
@@ -544,28 +540,29 @@ export default {
           for (let user in data) {
             var userObj = {};
             for (let key in data[user]) {
-              if (key == '"BIRTHDATE"') {
-                userObj[["birthDate"]] = data[user][key];
-                // userObj.push({["birthDate"] : data[user][key]});
-              }
-              if (key == '"BEGANSTUDYING"') {
-                // userObj.push({["beganStudying"] : data[user][key]});
-                userObj[["beganStudying"]] = data[user][key];
-              }
-              if (key == '"NUMBEROFSUBJECTS"') {
-                // userObj.push({["numberOfSubjects"] : data[user][key]});
-                userObj[["numberOfSubjects"]] = data[user][key];
-              }
-              if (key == '"KNOWNKLANGUAGES"') {
-                // userObj.push({["knownLanguages"] : data[user][key]});
-                userObj[["knownLanguages"]] = data[user][key];
-              } else if (key.toLowerCase() == '""') {
-                // userObj.push({["id"] : data[user][key]});
-                userObj[["id"]] = data[user][key];
-              } else {
+              // if (key == '"BIRTHDATE"') {
+              //   userObj[["birthDate"]] = data[user][key];
+              //   // userObj.push({["birthDate"] : data[user][key]});
+              // }
+              // if (key == '"BEGANSTUDYING"') {
+              //   // userObj.push({["beganStudying"] : data[user][key]});
+              //   userObj[["beganStudying"]] = data[user][key];
+              // }
+              // if (key == '"NUMBEROFSUBJECTS"') {
+              //   // userObj.push({["numberOfSubjects"] : data[user][key]});
+              //   userObj[["numberOfSubjects"]] = data[user][key];
+              // }
+              // if (key == '"KNOWNKLANGUAGES"') {
+              //   // userObj.push({["knownLanguages"] : data[user][key]});
+              //   userObj[["knownLanguages"]] = data[user][key];
+              // } else if (key.toLowerCase() == '""') {
+              //   // userObj.push({["id"] : data[user][key]});
+              //   userObj[["id"]] = data[user][key];
+              // } else {
                 var k = key.toLowerCase();
-                userObj[JSON.parse(k)] = data[user][key];
-              }
+                userObj[k] = data[user][key];
+                // userObj[JSON.parse(k)] = data[user][key];
+              // }
             }
             console.log(userObj);
             // usersArray.push(JSON.parse(o));
