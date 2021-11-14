@@ -544,7 +544,6 @@ export default {
                 userObj[k] = data[user][key];
               // }
             }
-            console.log(userObj);
             usersArray.push(userObj);
           }
           for (let title in data[0]) {
