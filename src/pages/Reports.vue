@@ -15,9 +15,7 @@
               border
               rounded-md
               p-5
-              hover:text-indigo-900
-              hover:bg-indigo-100
-              hover:border-indigo-400
+              hover:text-indigo-900 hover:bg-indigo-100 hover:border-indigo-400
               mx-2
             "
             @click="loadData('messages')"
@@ -33,9 +31,7 @@
               border
               rounded-md
               p-5
-              hover:text-green-900
-              hover:bg-green-100
-              hover:border-green-400
+              hover:text-green-900 hover:bg-green-100 hover:border-green-400
               mx-2
             "
             @click="loadData('rights')"
@@ -51,9 +47,7 @@
               border
               rounded-md
               p-5
-              hover:text-red-900
-              hover:bg-red-100
-              hover:border-red-400
+              hover:text-red-900 hover:bg-red-100 hover:border-red-400
               mx-2
             "
             @click="loadData('wrongs')"
@@ -69,9 +63,7 @@
               border
               rounded-md
               p-5
-              hover:text-yellow-900
-              hover:bg-yellow-100
-              hover:border-yellow-400
+              hover:text-yellow-900 hover:bg-yellow-100 hover:border-yellow-400
               mx-2
             "
             @click="loadData('inputs')"
@@ -87,9 +79,7 @@
               border
               rounded-md
               p-5
-              hover:text-purple-900
-              hover:bg-purple-100
-              hover:border-purple-400
+              hover:text-purple-900 hover:bg-purple-100 hover:border-purple-400
               mx-2
             "
             @click="loadData('deletions')"
@@ -105,9 +95,7 @@
               border
               rounded-md
               p-5
-              hover:text-indigo-900
-              hover:bg-indigo-100
-              hover:border-indigo-400
+              hover:text-indigo-900 hover:bg-indigo-100 hover:border-indigo-400
               mx-2
             "
             @click="loadDataset()"
@@ -123,33 +111,44 @@
               border
               rounded-md
               p-5
-              hover:text-indigo-900
-              hover:bg-indigo-100
-              hover:border-indigo-400
+              hover:text-indigo-900 hover:bg-indigo-100 hover:border-indigo-400
               mx-2
             "
             @click="loadAnalysis()"
           >
             Run analysis
-            <img class="w-8 mt-3 mx-auto" img src="https://img.icons8.com/ios/50/000000/run-command.png" />
+            <img
+              class="w-8 mt-3 mx-auto"
+              img
+              src="https://img.icons8.com/ios/50/000000/run-command.png"
+            />
           </button>
           <button
             class="
               border
               rounded-md
               p-5
-              hover:text-indigo-900
-              hover:bg-indigo-100
-              hover:border-indigo-400
+              hover:text-indigo-900 hover:bg-indigo-100 hover:border-indigo-400
               mx-2
             "
             @click="showAnalysis()"
           >
             Show analysis
-            <img class="w-8 mt-3 mx-auto" src="https://img.icons8.com/ios/50/000000/show-property.png" />
+            <img
+              class="w-8 mt-3 mx-auto"
+              src="https://img.icons8.com/ios/50/000000/show-property.png"
+            />
           </button>
-          <!-- <div>
-            <data-table v-bind="parametersTable2" />
+
+          <!-- <div v-for="item in parametersImage()" v-bind:key="item">
+            <img
+              v-bind:src="
+                'http://localhost:3000/' + sessionName() + '/' + item + '.png'
+              "
+              class="img-fluid"
+              width="300px"
+              v-bind:alt="item.nombre"
+            />
           </div> -->
           <div
             v-if="finishAnalysis"
@@ -158,6 +157,36 @@
             <div>
               <data-table v-bind="parametersTable1()" />
             </div>
+            <table
+              id="myTable"
+              class="display table-bordered nowrap"
+              cellspacing="0"
+              width="100%"
+            >
+              <thead>
+                <th>Graph Results exercise 1-1</th>
+                <th>Graph Results exercise 2-1</th>
+              </thead>
+              <tbody v-for="item in parametersImage()" v-bind:key="item">
+                <tr>
+                  <td v-for="i in item" v-bind:key="i">
+                    {{ i }}
+                    <img
+                      v-bind:src="
+                        'http://localhost:3000/' +
+                        sessionName() +
+                        '/' +
+                        i +
+                        '.png'
+                      "
+                      class="img-fluid"
+                      width="300px"
+                    />
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <!-- <img class="w-8 mt-3 mx-auto" src="" /> -->
             <!-- <table
               id="myTable"
               class="display table-bordered nowrap"
@@ -210,8 +239,8 @@ import Vue from "vue";
 import DataTable from "@andresouzaabreu/vue-data-table";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "@andresouzaabreu/vue-data-table/dist/DataTable.css";
-
 // import users from "./users.js";
+// import datos from ;
 
 Vue.component("data-table", DataTable);
 export default {
@@ -220,55 +249,7 @@ export default {
     DataTable,
     apexchart: VueApexCharts,
   },
-  computed: {
-    // parametersTable1() {
-    //   return {
-    //     data: users2,
-    //     actionMode: "multiple",
-    //     columnKeys: [
-    //       "id",
-    //       "code",
-    //       "mail",
-    //       "gender",
-    //       "birthDate",
-    //       "subject",
-    //       "beganStudying",
-    //       "numberOfSubjects",
-    //       "knownLanguages",
-    //       "signedUpOn",
-    //       "token",
-    //       "room",
-    //       "token",
-    //       "blind",
-    //       "jsexp",
-    //     ],
-    //   };
-    // },
-    // parametersTable2() {
-    //   return {
-    //     data: users,
-    //     actionMode: "multiple",
-    //     columnKeys: [
-    //       "id",
-    //       "code",
-    //       "mail",
-    //       "gender",
-    //       "birthDate",
-    //       "subject",
-    //       "beganStudying",
-    //       "beganStudying",
-    //       "numberOfSubjects",
-    //       "knownLanguages",
-    //       "signedUpOn",
-    //       "token",
-    //       "room",
-    //       "token",
-    //       "blind",
-    //       "jsexp",
-    //     ],
-    //   };
-    // },
-  },
+  computed: {},
   data() {
     return {
       tests: [],
@@ -321,20 +302,38 @@ export default {
     };
   },
   methods: {
-    parametersTable1() {
-      var f = [];
-      // var users2 = this.users;
-      // var users3 = users;
-      // console.log(users);
+    parametersImage() {
       if (!this.users) {
+        this.finishAnalysis = false;
         alert(
           'The is no analysis, please run analysis by pressing "Run Analysis" button'
         );
         return 0;
       } else {
+        // const folder = "localhost:3000/" + this.$route.params.sessionName + "/";
+        return [
+          ["analysis_DELETIONS1-1", "analysis_DELETIONS2-1"],
+          ["analysis_INPUTS1-1", "analysis_INPUTS2-1"],
+          ["analysis_MESSAGES1-1", "analysis_MESSAGES2-1"],
+          ["analysis_RIGHTS1-1", "analysis_RIGHTS2-1"],
+          ["analysis_WRONGS1-1", "analysis_WRONGS2-1"],
+        ];
+      }
+    },
+    sessionName() {
+      return this.$route.params.sessionName;
+    },
+    parametersTable1() {
+      var f = [];
+      if (!this.users) {
+        this.finishAnalysis = false;
+        // alert(
+        //   'The is no analysis, please run analysis by pressing "Run Analysis" button'
+        // );
+        return 0;
+      } else {
         this.users.map((x) => f.push(x));
 
-      
         return {
           data: this.users,
           columnKeys: [
@@ -385,7 +384,7 @@ export default {
         });
     },
     loadReport(test, exercise) {
-            console.log(exercise);
+      console.log(exercise);
 
       fetch(
         `${process.env.VUE_APP_TC_API}/tests/${this.$route.params.sessionName}/${test}/${exercise}/reports`,
@@ -533,16 +532,13 @@ export default {
         })
         .then((data) => {
           this.finishAnalysis = true;
-          // var $ = require("jquery");
-
           const usersArray = [];
           const columnTitles = [];
           for (let user in data) {
             var userObj = {};
             for (let key in data[user]) {
-                var k = key.toLowerCase();
-                userObj[k] = data[user][key];
-              // }
+              var k = key.toLowerCase();
+              userObj[k] = data[user][key];
             }
             usersArray.push(userObj);
           }
