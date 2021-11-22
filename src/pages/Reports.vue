@@ -150,14 +150,26 @@
               v-bind:alt="item.nombre"
             />
           </div> -->
+          <!-- <img width="300px" class="img-fluid" src="https://twincode-image-analysis.s3.eu-west-3.amazonaws.com/analysis_DELETIONS1-1.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAXF5HBEYNITNBWEGR%2F20211122%2Feu-west-3%2Fs3%2Faws4_request&X-Amz-Date=20211122T231232Z&X-Amz-Expires=3600&X-Amz-Signature=c25cef2f8cb7813693d041d2469746a803d1b2256874a9b974c092e5dd7d6f32&X-Amz-SignedHeaders=host"/> -->
           <div
             v-if="finishAnalysis"
             class="p-3 text-left max-w-4xl mx-auto mb-20 relative"
           >
+            <tbody >
+                <tr v-for="item in urls" v-bind:key="item"> 
+                  <td >
+                     <img
+                      v-bind:src=item
+                      class="img-fluid"
+                      width="300px"
+                    />
+                  </td>
+                </tr>
+              </tbody>
             <div>
               <data-table v-bind="parametersTable1()" />
             </div>
-            <table
+            <!-- <table
               id="myTable"
               class="display table-bordered nowrap"
               cellspacing="0"
@@ -182,10 +194,13 @@
                       class="img-fluid"
                       width="300px"
                     />
+                    <div v-for="(data, key) in imgURL" :key="key">
+                      <img :src="getLink(data)" />
+                    </div>
                   </td>
                 </tr>
               </tbody>
-            </table>
+            </table> -->
             <!-- <img class="w-8 mt-3 mx-auto" src="" /> -->
             <!-- <table
               id="myTable"
@@ -257,6 +272,7 @@ export default {
       series: [],
       participants: [],
       finishLoading: false,
+      urls: [],
       finishAnalysis: false,
       chartOptions: {
         chart: {
@@ -532,17 +548,19 @@ export default {
         })
         .then((data) => {
           this.finishAnalysis = true;
+          this.urls = data.urls;
           const usersArray = [];
           const columnTitles = [];
-          for (let user in data) {
+          const realData = data.data;
+          for (let user in realData) {
             var userObj = {};
-            for (let key in data[user]) {
+            for (let key in realData[user]) {
               var k = key.toLowerCase();
-              userObj[k] = data[user][key];
+              userObj[k] = realData[user][key];
             }
             usersArray.push(userObj);
           }
-          for (let title in data[0]) {
+          for (let title in realData[0]) {
             columnTitles.push(title);
           }
           this.users = usersArray;
