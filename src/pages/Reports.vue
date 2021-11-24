@@ -140,32 +140,24 @@
             />
           </button>
 
-          <!-- <div v-for="item in parametersImage()" v-bind:key="item">
-            <img
-              v-bind:src="
-                'http://localhost:3000/' + sessionName() + '/' + item + '.png'
-              "
-              class="img-fluid"
-              width="300px"
-              v-bind:alt="item.nombre"
-            />
-          </div> -->
-          <!-- <img width="300px" class="img-fluid" src="https://twincode-image-analysis.s3.eu-west-3.amazonaws.com/analysis_DELETIONS1-1.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAXF5HBEYNITNBWEGR%2F20211122%2Feu-west-3%2Fs3%2Faws4_request&X-Amz-Date=20211122T231232Z&X-Amz-Expires=3600&X-Amz-Signature=c25cef2f8cb7813693d041d2469746a803d1b2256874a9b974c092e5dd7d6f32&X-Amz-SignedHeaders=host"/> -->
           <div
             v-if="finishAnalysis"
             class="p-3 text-left max-w-4xl mx-auto mb-20 relative"
           >
-            <tbody >
-                <tr v-for="item in urls" v-bind:key="item"> 
-                  <td >
-                     <img
-                      v-bind:src=item
-                      class="img-fluid"
-                      width="300px"
-                    />
+            <table
+              id="myTable"
+              class="display table-bordered nowrap"
+              cellspacing="0"
+              width="100%"
+            >
+              <tbody v-for="(url,i) in urls" v-bind:key="url">
+                <tr> Exercise-{{i+1}}
+                  <td v-for="name in url" v-bind:key="name">
+                    <img v-bind:src="name" class="img-fluid" width="800px" />
                   </td>
                 </tr>
               </tbody>
+            </table>
             <div>
               <data-table v-bind="parametersTable1()" />
             </div>
@@ -548,7 +540,24 @@ export default {
         })
         .then((data) => {
           this.finishAnalysis = true;
-          this.urls = data.urls;
+          const arr = [];
+
+          var i = 0;
+          for (let exercise in data.urls) {
+            if (!isNaN(exercise.charAt(0))) {
+              var j = 0;
+              var arrAux = [];
+              for (var url in data.urls[exercise]) {
+                arrAux[j] = Object.values(data.urls[exercise][url])[0];
+                j++;
+              }
+              console.log(arrAux);
+              arr[i] = arrAux;
+              i++;
+            }
+          }
+          console.log(arr);
+          this.urls = arr;
           const usersArray = [];
           const columnTitles = [];
           const realData = data.data;
